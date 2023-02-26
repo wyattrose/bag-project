@@ -17,4 +17,4 @@ public enum GroceryItemFieldIds
     RIGIDITY,
     BREAKABLE,
     PERISHABLE
-    }
+    } // end of GroceryItemFieldIds enum

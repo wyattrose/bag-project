@@ -94,4 +94,4 @@ public enum GroceryItemFirmness
             System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemFirmness.ordinal(), anItemFirmness, anItemFirmness.name(), anItemFirmness, anItemFirmness.name, anItemFirmness.firmnessValue, interpretDescription(anItemFirmness.toString()));
             }
         } // end of main( String[] )
-    }
+    } // end of GroceryItemFirmness enum

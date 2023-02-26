@@ -88,4 +88,4 @@ public enum GroceryItemWeight
             System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemWeight.ordinal(), anItemWeight, anItemWeight.name(), anItemWeight, anItemWeight.name, anItemWeight.weightValue, interpretDescription(anItemWeight.toString()));
             }
         } // end of test case main( String[] )
-    }
+    } // end of GroceryItemWeight enum
