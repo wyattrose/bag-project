@@ -5,7 +5,7 @@ package edu.wit.scds.ds.bag.app;
  * 
  * @author Wyatt R. Rose
  * 
- * @version 1.0.0 version for the GroceryBagger application
+ * @version 1.0.1 version for the GroceryBagger application
  */
 public enum GroceryItemFirmness
     {
@@ -27,18 +27,18 @@ public enum GroceryItemFirmness
     public final String name;
 
     /** integer equivalent of the firmness */
-    public final int value;
+    public final int firmnessValue;
 
     /**
      * @param name
      *  formatted name
-     * @param itemSizeValue
+     * @param firmnessValue
      *  integer equivalent of the firmness
      */
-    private GroceryItemFirmness(final String name, final int value)
+    private GroceryItemFirmness(final String name, final int firmnessValue)
         {
         this.name = name;
-        this.value = value;
+        this.firmnessValue = firmnessValue;
         } // end of GroceryItemFirmness( String, int )
 
     /**
@@ -91,7 +91,7 @@ public enum GroceryItemFirmness
         // display each element of the enumeration (I really don't like how that sounds out loud)
         for( final GroceryItemFirmness anItemFirmness : GroceryItemFirmness.values() )
             {
-            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemFirmness.ordinal(), anItemFirmness, anItemFirmness.name(), anItemFirmness, anItemFirmness.name, anItemFirmness.value, interpretDescription(anItemFirmness.toString()));
+            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemFirmness.ordinal(), anItemFirmness, anItemFirmness.name(), anItemFirmness, anItemFirmness.name, anItemFirmness.firmnessValue, interpretDescription(anItemFirmness.toString()));
             }
         } // end of main( String[] )
     }

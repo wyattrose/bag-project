@@ -5,7 +5,7 @@ package edu.wit.scds.ds.bag.app;
  * 
  * @author Wyatt R. Rose
  * 
- * @version 1.0.0 version for the GroceryBagger application
+ * @version 1.0.1 version for the GroceryBagger application
  */
 public enum GroceryItemWeight
     {
@@ -21,18 +21,18 @@ public enum GroceryItemWeight
     public final String name;
 
     /** integer equivalent of the weight */
-    public final int value;
+    public final int weightValue;
 
     /**
      * @param name
      *  formatted name
-     * @param itemWeightValue
+     * @param weightValue
      * integer equivalent of the weight
      */
-    private GroceryItemWeight(final String name, final int value)
+    private GroceryItemWeight(final String name, final int weightValue)
         {
         this.name = name;
-        this.value = value;
+        this.weightValue = weightValue;
         } // end of GroceryItemWeight( String, int )
 
     /**
@@ -85,7 +85,7 @@ public enum GroceryItemWeight
         // display each element of the enumeration (I really don't like how that sounds out loud)
         for( final GroceryItemWeight anItemWeight : GroceryItemWeight.values() )
             {
-            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemWeight.ordinal(), anItemWeight, anItemWeight.name(), anItemWeight, anItemWeight.name, anItemWeight.value, interpretDescription(anItemWeight.toString()));
+            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemWeight.ordinal(), anItemWeight, anItemWeight.name(), anItemWeight, anItemWeight.name, anItemWeight.weightValue, interpretDescription(anItemWeight.toString()));
             }
         } // end of test case main( String[] )
     }
