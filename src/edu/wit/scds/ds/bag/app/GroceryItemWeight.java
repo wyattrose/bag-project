@@ -10,6 +10,8 @@ package edu.wit.scds.ds.bag.app;
 public enum GroceryItemWeight
     {
 
+    // TODO: style guides (remember space before semi-colon)
+
     // Weight - Name - Value
     /**Light item */
     LIGHT ( "Light", 1 ),

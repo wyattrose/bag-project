@@ -9,7 +9,8 @@ package edu.wit.scds.ds.bag.app;
  */
 public enum GroceryItemFirmness
     {
-
+    
+    // TODO: style guides (remember space before semi-colon)
 
     // Firmness - Name - Value
     /** Soft item */

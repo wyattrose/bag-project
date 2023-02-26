@@ -3,7 +3,7 @@ package edu.wit.scds.ds.bag.app;
 public class GroceryBagger {
 
         // TODO: document methods
-        // TODO: change indentation (refer style guides)
+        // TODO: change indentation, semi colon space (refer style guides)
 
         public static boolean isCompatible(GroceryBag b, GroceryItem i) {
         

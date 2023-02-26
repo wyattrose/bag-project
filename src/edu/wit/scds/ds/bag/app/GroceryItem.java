@@ -8,7 +8,7 @@ package edu.wit.scds.ds.bag.app;
  */
 public class GroceryItem
     {
-
+    
     /** The name of the item*/
     private final String name ;
 
@@ -27,25 +27,30 @@ public class GroceryItem
     /** How fragile the item is */
     private final boolean breakable ;
 
+    /** Raw file input string */
+    private final String rawInput ;
+
 
     /**
      * Primary single parameter constructor for initializing items from an item definition string
      * 
      * @param rawInput the string with values for creating the item
      */
-    public GroceryItem(String rawInput) {
+    public GroceryItem(String rawInput)
+        {
 
-        final String[] itemFields = rawInput.split("\t"); // help with regex: https://regexone.com/
+        final String[] itemFields = rawInput.split("\t") ; // help with regex: https://regexone.com/
 
         // this porition uses GroceryItemFieldIds, the string input must correspond to the ordinality of GroceryItemFieldIds
-        this.name = itemFields[GroceryItemFieldIds.NAME.ordinal()];
-        this.size = GroceryItemSize.interpretDescription(itemFields[GroceryItemFieldIds.SIZE.ordinal()]).sizeValue;
-        this.weight = GroceryItemWeight.interpretDescription(itemFields[GroceryItemFieldIds.WEIGHT.ordinal()]).weightValue;
-        this.firmness = GroceryItemFirmness.interpretDescription(itemFields[GroceryItemFieldIds.FIRMNESS.ordinal()]).firmnessValue;
-        this.rigidity = Boolean.parseBoolean(itemFields[GroceryItemFieldIds.RIGIDITY.ordinal()]);
-        this.breakable = Boolean.parseBoolean(itemFields[GroceryItemFieldIds.BREAKABLE.ordinal()]);
+        this.rawInput = rawInput ;
+        this.name = itemFields[GroceryItemFieldIds.NAME.ordinal()] ;
+        this.size = GroceryItemSize.interpretDescription(itemFields[GroceryItemFieldIds.SIZE.ordinal()]).sizeValue ;
+        this.weight = GroceryItemWeight.interpretDescription(itemFields[GroceryItemFieldIds.WEIGHT.ordinal()]).weightValue ;
+        this.firmness = GroceryItemFirmness.interpretDescription(itemFields[GroceryItemFieldIds.FIRMNESS.ordinal()]).firmnessValue ;
+        this.rigidity = Boolean.parseBoolean(itemFields[GroceryItemFieldIds.RIGIDITY.ordinal()]) ;
+        this.breakable = Boolean.parseBoolean(itemFields[GroceryItemFieldIds.BREAKABLE.ordinal()]) ;
 
-    }
+        } // end of default constructor
 
     /**
      * Accessor for name attribute
@@ -106,5 +111,15 @@ public class GroceryItem
         return rigidity ;
 
         } // end of isRigid()
+    
+    /**
+     * toString method overriden from java.lang.Object
+     * @return formatted string representing this item
+     */
+    @Override
+    public String toString()
+        {
+        return rawInput ;
+        } // end of toString()
 
     } // end of GroceryItem class

@@ -12,6 +12,8 @@ import edu.wit.scds.ds.bag.adt.ResizableArrayBag;
 public class GroceryBag implements BagInterface<GroceryItem>
 	{
 	
+    // TODO: style guides (remember space before semi-colon)
+	
     /** Underlying data structure used for storing GroceryItems */
 	private ResizableArrayBag<GroceryItem> b = new ResizableArrayBag<>();
 
