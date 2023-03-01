@@ -1,7 +1,7 @@
-package edu.wit.scds.ds.bag.app;
+package edu.wit.scds.ds.bag.app ;
 
-import edu.wit.scds.ds.bag.BagInterface;
-import edu.wit.scds.ds.bag.adt.ResizableArrayBag;
+import edu.wit.scds.ds.bag.BagInterface ;
+import edu.wit.scds.ds.bag.adt.ResizableArrayBag ;
 
 /**
  * A grocery bag that stores items
@@ -12,31 +12,29 @@ import edu.wit.scds.ds.bag.adt.ResizableArrayBag;
 public class GroceryBag implements BagInterface<GroceryItem>
 	{
 	
-    // TODO: style guides (remember space before semi-colon)
-	
     /** Underlying data structure used for storing GroceryItems */
-	private ResizableArrayBag<GroceryItem> b = new ResizableArrayBag<>();
+	private ResizableArrayBag<GroceryItem> b = new ResizableArrayBag<>() ;
 
     /** Maximum volume of the bag (unit is abstract) */
-	private final int maxVolume = 10;
+	private final int maxVolume = 10 ;
 
     /** Maximum weight of the bag (unit is abstract) */
-	private final int maxWeight = 10;
+	private final int maxWeight = 10 ;
 
     /** The current volume of the bag */
-	private int currentVolume;
+	private int currentVolume ;
 
     /** The current weight of the bag */
-	private int currentWeight;
+	private int currentWeight ;
 	
 	/**
 	 * Default constructor, initializes current volume and current weight to zero
 	 */
 	public GroceryBag()
 		{
-		super(); // explicit > implicit
-		this.currentVolume = 0;
-		this.currentWeight = 0;
+		super() ; // explicit > implicit
+		this.currentVolume = 0 ;
+		this.currentWeight = 0 ;
 		
 		} // end of default constructor
 	
@@ -52,13 +50,13 @@ public class GroceryBag implements BagInterface<GroceryItem>
         // if bag is full, you can't add another item
 		if(isFull())
 			{
-			return false;
+			return false ;
 			}
 		
-		this.currentVolume += newEntry.getSize();
-		this.currentWeight += newEntry.getWeight();
+		this.currentVolume += newEntry.getSize() ;
+		this.currentWeight += newEntry.getWeight() ;
 		
-		return b.add(newEntry);
+		return b.add(newEntry) ;
 		
 		} // end of add( GroceryItem )
 	
@@ -68,9 +66,9 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public void clear()
 		{
-		b.clear();
-		this.currentVolume = 0;
-		this.currentWeight = 0;
+		b.clear() ;
+		this.currentVolume = 0 ;
+		this.currentWeight = 0 ;
 		
 		} // end of clear()
 
@@ -82,7 +80,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public boolean contains(GroceryItem anEntry)
 		{
-		return b.contains(anEntry);
+		return b.contains(anEntry) ;
 		
 		} // end of contains( GroceryItem )
 
@@ -93,7 +91,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public int getCurrentSize()
 		{
-		return b.getCurrentSize();
+		return b.getCurrentSize() ;
 		
 		} // end of getCurrentSize()
 
@@ -105,7 +103,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public int getFrequencyOf(GroceryItem anEntry)
 		{
-		return b.getFrequencyOf(anEntry);
+		return b.getFrequencyOf(anEntry) ;
 		
 		} // end of getFrequencyOf( GroceryItem )
 	
@@ -116,7 +114,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public boolean isEmpty()
 		{
-		return b.isEmpty();
+		return b.isEmpty() ;
 		
 		} // end of isEmpty() 
 	
@@ -128,16 +126,16 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	public GroceryItem remove()
 		{
 		
-		GroceryItem item = b.remove();
+		GroceryItem item = b.remove() ;
 		
 		if(item != null)
 			{
 		
-			this.currentVolume -= item.getSize();
-			this.currentWeight -= item.getWeight();
+			this.currentVolume -= item.getSize() ;
+			this.currentWeight -= item.getWeight() ;
 			}
 		
-		return item;
+		return item ;
 		
 		} // end of remove()
 	
@@ -151,13 +149,13 @@ public class GroceryBag implements BagInterface<GroceryItem>
 		{
 		if(b.remove(anEntry)) 
 			{
-			this.currentVolume -= anEntry.getSize();
-			this.currentWeight -= anEntry.getWeight();
+			this.currentVolume -= anEntry.getSize() ;
+			this.currentWeight -= anEntry.getWeight() ;
 			
-			return true;
+			return true ;
 			
 			}
-		return false;
+		return false ;
 		
 		} // end of remove( GroceryItem )
 
@@ -168,7 +166,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public GroceryItem[] toArray()
 		{
-		return b.toArray();
+		return b.toArray() ;
 		
 		} // end of toArray()
 	
@@ -178,7 +176,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	 */
 	public boolean isFull()
 		{
-		return this.currentVolume >= this.maxVolume || this.currentWeight >= this.maxWeight;
+		return this.currentVolume >= this.maxVolume || this.currentWeight >= this.maxWeight ;
 		
 		} // end of isFull()
 	
@@ -188,7 +186,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	 */
 	public int getCurrentVolume()
 		{
-		return currentVolume;
+		return currentVolume ;
 		
 		} // end of getCurrentVolume()
 	
@@ -198,7 +196,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	 */
 	public int getCurrentWeight()
 		{
-		return currentWeight;
+		return currentWeight ;
 		
 		} // end of getCurrentWeight()
 	
@@ -208,7 +206,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	 */
 	public int getMaxVolume()
 		{
-		return maxVolume;
+		return maxVolume ;
 		
 		} // end of getMaxVolume()
 	
@@ -218,7 +216,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	 */
 	public int getMaxWeight()
 		{
-		return maxWeight;
+		return maxWeight ;
 		
 		} // end of getMaxWeight()
 	
