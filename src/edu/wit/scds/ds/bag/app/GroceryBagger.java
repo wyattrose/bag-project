@@ -17,6 +17,10 @@ import java.util.Scanner;
  */
 
 public class GroceryBagger {
+    
+    
+    //TODO: Fix indentations and semicolons, check style guide
+    //TODO: Finish main method
 
 public static void main(String[] args) {
 
