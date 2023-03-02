@@ -41,7 +41,6 @@ public class GroceryBagger
     
         catch ( FileNotFoundException e )
             {
-            // TODO Auto-generated catch block
             e.printStackTrace() ;
 
             }

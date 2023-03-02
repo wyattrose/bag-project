@@ -1,4 +1,4 @@
-package edu.wit.scds.ds.bag.app;
+package edu.wit.scds.ds.bag.app ;
 
 /**
  * Enumeration of grocery item firmness for the GroceryBagger application.
@@ -10,8 +10,6 @@ package edu.wit.scds.ds.bag.app;
 public enum GroceryItemFirmness
     {
     
-    // TODO: style guides (remember space before semi-colon)
-
     // Firmness - Name - Value
     /** Soft item */
     SOFT ( "Soft", 1),
@@ -20,15 +18,15 @@ public enum GroceryItemFirmness
     HARD ( "Hard", 2),
 
     /** Firm item */
-    FIRM ( "Firm", 3);
+    FIRM ( "Firm", 3) ;
 
     /** DATA FIELDS */
 
     /** formatted name */
-    public final String name;
+    public final String name ;
 
     /** integer equivalent of the firmness */
-    public final int firmnessValue;
+    public final int firmnessValue ;
 
     /**
      * @param name
@@ -38,8 +36,8 @@ public enum GroceryItemFirmness
      */
     private GroceryItemFirmness(final String name, final int firmnessValue)
         {
-        this.name = name;
-        this.firmnessValue = firmnessValue;
+        this.name = name ;
+        this.firmnessValue = firmnessValue ;
         } // end of GroceryItemFirmness( String, int )
 
     /**
@@ -56,11 +54,11 @@ public enum GroceryItemFirmness
         
         return switch ( firmnessDescription.toLowerCase().charAt(0))
             {
-            case 's' -> SOFT;
-            case 'h' -> HARD;
-            case 'f' -> FIRM;
-            default -> HARD;
-            };
+            case 's' -> SOFT ;
+            case 'h' -> HARD ;
+            case 'f' -> FIRM ;
+            default -> HARD ;
+            } ;
         } // end of interpretDescription( String )
 
     /*
@@ -70,7 +68,7 @@ public enum GroceryItemFirmness
     @Override
     public String toString()
         {
-        return this.name;
+        return this.name ;
 
         } // end of toString()
 
@@ -84,15 +82,15 @@ public enum GroceryItemFirmness
         {
         
         // writing test cases is easy, when you don't have a social life
-        System.out.printf("Members of the %s enumeration%n%n", GroceryItemFirmness.class.getSimpleName());
+        System.out.printf("Members of the %s enumeration%n%n", GroceryItemFirmness.class.getSimpleName()) ;
 
         // display column headers (why so many string literals 先輩)
-        System.out.printf("%-5s %-15s %-15s %-15s %-15s %-15s%n", "#", "Item Size", "Name", "Display Name", "Firmness Value", "Interpreted Firmness");
+        System.out.printf("%-5s %-15s %-15s %-15s %-15s %-15s%n", "#", "Item Size", "Name", "Display Name", "Firmness Value", "Interpreted Firmness") ;
 
         // display each element of the enumeration (I really don't like how that sounds out loud)
         for( final GroceryItemFirmness anItemFirmness : GroceryItemFirmness.values() )
             {
-            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemFirmness.ordinal(), anItemFirmness, anItemFirmness.name(), anItemFirmness, anItemFirmness.name, anItemFirmness.firmnessValue, interpretDescription(anItemFirmness.toString()));
+            System.out.printf("%-5d %-15s %-15s %-15s %-15s %-15s%n", anItemFirmness.ordinal(), anItemFirmness, anItemFirmness.name(), anItemFirmness, anItemFirmness.name, anItemFirmness.firmnessValue, interpretDescription(anItemFirmness.toString())) ;
             }
         } // end of main( String[] )
     } // end of GroceryItemFirmness enum
