@@ -1,11 +1,11 @@
-package edu.wit.scds.ds.bag.app;
+package edu.wit.scds.ds.bag.app ;
 
 import edu.wit.scds.ds.bag.BagInterface ;
 
 import java.io.File ;
 import java.io.FileInputStream ;
 import java.io.FileNotFoundException ;
-import java.util.Scanner;
+import java.util.Scanner ;
 
 /**
  * Class decides on item compatibility and puts items in bag 
@@ -16,40 +16,38 @@ import java.util.Scanner;
  *
  */
 
-public class GroceryBagger {
-    
-    
-    //TODO: Fix indentations and semicolons, check style guide
-    //TODO: Finish main method
-
-public static void main(String[] args) {
-
-
-
-    try                             
+public class GroceryBagger 
     {
-    Scanner fin = new Scanner(new FileInputStream("./data/shopping-cart.data"));
+
+    public static void main(String[] args) 
+        {
+
+
+
+        try                             
+            {
+            Scanner fin = new Scanner(new FileInputStream("./data/shopping-cart.data")) ;
     
-    String ignoreFirstLine = fin.nextLine();
+            String ignoreFirstLine = fin.nextLine() ;
     
-    String nextItem = fin.nextLine();
+            String nextItem = fin.nextLine() ;
      
-    //GroceryItem nextGrocery = new GroceryItem(String nextItem);
+            //GroceryItem nextGrocery = new GroceryItem(String nextItem);
     
-    BagInterface<GroceryItem> nextBag = new GroceryBag();
+            BagInterface<GroceryItem> nextBag = new GroceryBag() ;
         
        
-    }
+            }
     
-    catch ( FileNotFoundException e )
-    {
-    // TODO Auto-generated catch block
-    e.printStackTrace() ;
+        catch ( FileNotFoundException e )
+            {
+            // TODO Auto-generated catch block
+            e.printStackTrace() ;
 
-    }
+            }
 
 
-}
+        } //end of main method
 
 
         /**
@@ -63,96 +61,139 @@ public static void main(String[] args) {
         public static boolean isCompatible(GroceryBag b, GroceryItem i) 
             {
         
-        // status of bag
-            if(b.isEmpty()) {
-                return true;
-            }
-            if(b.isFull()) {
-                return false;
-            }
-            
-       // limitations
-            if(itemTooHeavy(b,i)) {
-                return false;
-            }
-            if(itemTooBig(b,i)) {
-                return false;
-            }
-            
-      // restrictions
-            
-            // item is soft
-            if(i.getFirmness() == 1) {
-                if(bagContainsHeavy(b.toArray())) {
-                    return false;
+            /**
+            * item is compatible if bag is empty
+            * item is not compatible if bag is full
+            */
+            if(b.isEmpty()) 
+                {
+                return true ;
+                }
+            if(b.isFull()) 
+                {
+                 return false ;
                 }
             
-            }
-            
-            // item is very heavy
-            if(i.getWeight() >=7 ) {
-                return false;
-            }
-            
-            
-            // item is heavy
-            if(i.getWeight() >= 5) {
-                if(bagContainsSoft(b.toArray())) {
-                    return false;
+             // limitations
+            if(itemTooHeavy(b,i)) 
+                {
+                return false ;
                 }
-                else if(bagContainsLightBag(b.toArray())) {
-                    return false;
+            if(itemTooBig(b,i)) 
+                {
+                return false ;
                 }
-                else if(bagContainsLightRigidBreakable(b.toArray())) {
-                    return false;
-                }
-            }
+            
+             // restrictions
+            
+             /**
+             * item is soft
+             * don't put soft item with heavy item
+             */
+             if(i.getFirmness() == 1) 
+                 {
+                  if(bagContainsHeavy(b.toArray())) 
+                      {
+                      return false ;
+                      }
+            
+                 }
+            
+             /** item is very heavy
+             * only put very heavy item in an empty bag
+             * to keep it by itself
+             */
+             if(i.getWeight() >=7 ) 
+                 {
+                 return false ;
+                 }
+            
+             /** item is heavy
+             * don't put heavy item with a soft item
+             * or a light+rigid+breakable item
+             * or a light item with bag in its name
+             */
+             if(i.getWeight() >= 5) 
+                 {
+                 if(bagContainsSoft(b.toArray())) 
+                     {
+                     return false ;
+                     }
+                 else if(bagContainsLightBag(b.toArray())) 
+                     {
+                     return false ;
+                     }
+                 else if(bagContainsLightRigidBreakable(b.toArray())) 
+                     {
+                     return false ;
+                     }
+                 }
            
             
-            
-            // item is a bagged good
-            if(i.getName().contains( "bag" )) {
-                    //bagged item is light
-                    if(i.getWeight()==1) {
-                        if(bagContainsHeavy(b.toArray())) {
-                            return false;
+            /** item is a bagged good
+             * can't go with rigid item
+             * if light, can't go with rigid or heavy items
+             */
+            if(i.getName().contains( "bag" )) 
+                {
+                //item is also light
+                if(i.getWeight()==1) 
+                    {
+                    if(bagContainsHeavy(b.toArray())) 
+                        {
+                        return false ;
                         }
                     }
-                    else if(bagContainsRigid(b.toArray())) {
-                        return false;
+                    
+                if(bagContainsRigid(b.toArray())) 
+                    {
+                    return false ;
                     }
-            }
+                }
             
             
-            //item is rigid
-            if(i.isRigid()) {
+            /**item is rigid
+             * can't go with a bagged item (ex.bag of ice)
+             * can't go with a flexible and breakable item
+             * if item is also light and breakable it cannot go in a bag with a heavy item
+             */
+            if(i.isRigid()) 
+                {
             
-                    // item is light, rigid and breakable
-                    if(i.getWeight()==1 && i.isBreakable()) {
-                        if(bagContainsHeavy(b.toArray())) {
-                            return false;
+                // item is also light and breakable
+                if(i.getWeight()==1 && i.isBreakable()) 
+                    {
+                    if(bagContainsHeavy(b.toArray())) 
+                        {
+                        return false ;
                         }
                     }
-                    else if(bagContainsBaggedItem(b.toArray())) {
-                        return false;
+                    
+                if(bagContainsBaggedItem(b.toArray())) 
+                    {
+                    return false ;
                     }
-                    else if(bagContainsFlexibleBreakable(b.toArray())) {
-                        return false;
+                    
+                if(bagContainsFlexibleBreakable(b.toArray())) 
+                    {
+                    return false ;
                     }
                 
-            }
-            
-            
-            //item is flexible and breakable
-            if(   !(i.isRigid()) &&   i.isBreakable()   ){
-                if(bagContainsRigid(b.toArray())) {
-                    return false;
                 }
-            }
-                               
-
-            return true;
-        }
+            
+            
+            //item is flexible and breakable, can't go in a bag with rigid item
+            if(   !(i.isRigid()) &&   i.isBreakable()   )
+                {
+                if(bagContainsRigid(b.toArray())) 
+                    {
+                    return false ;
+                    }
+                }             
+            return true ;
+            
+            } //end of isCompatible method
+        
 
         /**
          * Checks whether there are any very heavy items in the bag
@@ -160,14 +201,17 @@ public static void main(String[] args) {
          * @param b array of grocery items in the bag
          * @return whether the bag contains a very heavy item t/f
          */
-        public static boolean bagContainsVeryHeavy(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].getWeight()==7) {
-                return true;
+        public static boolean bagContainsVeryHeavy(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].getWeight()==7) 
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-        return false;
-        }
         
         /**
          * Checks whether there are any heavy items in the bag
@@ -175,14 +219,18 @@ public static void main(String[] args) {
          * @param b array of grocery items in the bag
          * @return whether bag contains heavy item
          */
-        public static boolean bagContainsHeavy(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].getWeight()>=5) {
-                return true;
+        public static boolean bagContainsHeavy(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].getWeight()>=5) 
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-        return false;
-        }
+        
         /**
          * Checks whether there are any soft items in the bag
          * 
@@ -190,14 +238,17 @@ public static void main(String[] args) {
          * @param b array of grocery items in the bag
          * @return whether bag contains soft item
          */
-        public static boolean bagContainsSoft(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].getFirmness()==1) {
-                return true;
+        public static boolean bagContainsSoft(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].getFirmness()==1) 
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-        return false;
-        }
         
         /**
          * Checks whether there are any items 
@@ -206,31 +257,36 @@ public static void main(String[] args) {
          * @param b array of grocery items in the bag
          * @return whether bag contains a bagged item
          */
-        public static boolean bagContainsBaggedItem(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].getName().contains( "bag" )){
-                    return true;
+        public static boolean bagContainsBaggedItem(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].getName().contains( "bag" ))
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-            return false;
-        }
         
         
         /**
          * Checks whether any items in the bag are light bags
          * 
-         * 
          * @param b array of grocery items in the bag
          * @return whether bag contains a lightweight bagged item
          */
-        public static boolean bagContainsLightBag(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].getName().contains( "bag" ) && b[i].getWeight()==1){
-                return true;
+        public static boolean bagContainsLightBag(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].getName().contains( "bag" ) && b[i].getWeight()==1)
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-        return false;
-        }
         
         /**
          * Checks whether any rigid items in the bag
@@ -239,14 +295,17 @@ public static void main(String[] args) {
          * @param b array of grocery items in the bag
          * @return whether bag contains a rigid item
          */
-        public static boolean bagContainsRigid(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].isRigid()) {
-                    return true;
+        public static boolean bagContainsRigid(GroceryItem[] b) 
+            {
+            for(int i=0; i<b.length; i++) 
+                {
+                if(b[i].isRigid()) 
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-        return false;
-        }
         
         /**
          * Checks whether there are any items that are both light,
@@ -256,14 +315,17 @@ public static void main(String[] args) {
          * @param b array of grocery items in bag
          * @return whether bag contains a light, rigid and breakable item
          */
-        public static boolean bagContainsLightRigidBreakable(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(b[i].isRigid() && b[i].getWeight()==1 && b[i].isBreakable()) {
-                    return true;
+        public static boolean bagContainsLightRigidBreakable(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(b[i].isRigid() && b[i].getWeight()==1 && b[i].isBreakable()) 
+                    {
+                    return true ;
+                    }
                 }
-            }
             return false;
-        }
+            }
         
         /**
          * Checks whether there are any items that are both flexible and breakable
@@ -273,14 +335,17 @@ public static void main(String[] args) {
          * @param b array of grocery items in bag
          * @return whether bag contains a flexible and breakable item
          */
-        public static boolean bagContainsFlexibleBreakable(GroceryItem[] b) {
-            for(int i=0; i<b.length; i++) {
-                if(!(b[i].isRigid()) && b[i].isBreakable()) {
-                    return true;
+        public static boolean bagContainsFlexibleBreakable(GroceryItem[] b) 
+            {
+            for(int i=0 ; i<b.length ; i++) 
+                {
+                if(!(b[i].isRigid()) && b[i].isBreakable()) 
+                    {
+                    return true ;
+                    }
                 }
+            return false ;
             }
-            return false;
-        }
 
         /**
          * Checks whether the current item is too heavy to fit in
@@ -291,10 +356,10 @@ public static void main(String[] args) {
          * @param i current grocery item to be added to the bag
          * @return whether the item is too heavy to be compatible with current bag 
          */
-        public static boolean itemTooHeavy(GroceryBag b, GroceryItem i) {
-        return b.getCurrentWeight() + i.getWeight() > b.getMaxWeight();
-        
-        }
+        public static boolean itemTooHeavy(GroceryBag b, GroceryItem i) 
+            {
+            return b.getCurrentWeight() + i.getWeight() > b.getMaxWeight() ;
+            }
 
         /**
          * Checks whether the current item is too big to fit in
@@ -305,13 +370,14 @@ public static void main(String[] args) {
          * @param i current grocery item to be added to the bag
          * @return whether the item's volume is too big to be compatible with current bag 
          */
-        public static boolean itemTooBig(GroceryBag b, GroceryItem i) {
-        return b.getCurrentVolume() + i.getSize() > b.getMaxVolume();
-        }
+        public static boolean itemTooBig(GroceryBag b, GroceryItem i) 
+            {
+            return b.getCurrentVolume() + i.getSize() > b.getMaxVolume() ;
+            }
         
 
 
 
 
 
-}
+    } //end of class
