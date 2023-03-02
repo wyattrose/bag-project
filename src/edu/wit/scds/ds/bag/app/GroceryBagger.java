@@ -5,6 +5,7 @@ import edu.wit.scds.ds.bag.BagInterface ;
 import java.io.File ;
 import java.io.FileInputStream ;
 import java.io.FileNotFoundException ;
+import java.util.ArrayList ;
 import java.util.Scanner ;
 
 /**
@@ -26,27 +27,57 @@ public class GroceryBagger
 
         try                             
             {
-            Scanner fin = new Scanner(new FileInputStream("./data/shopping-cart.data")) ;
+            Scanner shoppingCart = new Scanner(new FileInputStream("./data/shopping-cart.data")) ;
     
-            String ignoreFirstLine = fin.nextLine() ;
-    
-            String nextItem = fin.nextLine() ;
-     
-            //GroceryItem nextGrocery = new GroceryItem(String nextItem);
-    
-            BagInterface<GroceryItem> nextBag = new GroceryBag() ;
+            String ignoreFirstLine = shoppingCart.nextLine() ;
+            
+            ArrayList <GroceryBag>bags = new ArrayList<GroceryBag>();
+            
+            for(int i=0 ; i<20 ; i++) 
+                {
+                bags.add( i, new GroceryBag() ) ;
+                }
+            
+            
+            for(int i=0; i<20; i++) 
+                {
+            
+                while(shoppingCart.hasNextLine()) 
+                    {
+                    GroceryItem nextItem = new GroceryItem(shoppingCart.nextLine());
+                    if(isCompatible( bags.get( i ), nextItem ) ) 
+                        {
+                        bags.get(i).add( nextItem ) ;
+                        continue ;
+                        }
+                    else 
+                        {
+                        bags.get( i+1 ).add( nextItem );
+                        break;
+                        }
+                    }
+                }
+            
+            
+            
+            
+            
+            }//end of try block
+            
         
-       
-            }
     
-        catch ( FileNotFoundException e )
+        catch ( final FileNotFoundException e )
             {
-            e.printStackTrace() ;
+         // can't open the file
+            System.out.printf( "Unable to open the shopping cart:%n%s%n", e ) ;
 
+            // get out
+            return ;
             }
 
 
         } //end of main method
+    
 
 
         /**
