@@ -6,6 +6,7 @@ import java.io.File ;
 import java.io.FileInputStream ;
 import java.io.FileNotFoundException ;
 import java.util.ArrayList ;
+import java.util.Arrays;
 import java.util.Scanner ;
 
 /**
@@ -43,7 +44,7 @@ public class GroceryBagger
                 while(shoppingCart.hasNextLine()) 
                     {
                     GroceryItem nextItem = new GroceryItem(shoppingCart.nextLine());
-                    if(isCompatible( bags.get( i ), nextItem ) )  // error is occuring right here
+                    if(isCompatible( bags.get( i ), nextItem ) )
                         {
                         bags.get(i).add( nextItem ) ;
                         continue ;
@@ -56,8 +57,15 @@ public class GroceryBagger
                     }
                 }
             
-            
-            
+
+                for(int j = 0; j < bags.size(); j++) {
+                    GroceryItem[] itemArray = bags.get(j).toArray();
+                    System.out.printf("Bag #%d%n",j);
+                    for(int i = 0; i < itemArray.length; i++) {
+                        System.out.println("\t"+itemArray[i].toString());
+                    }
+
+                }
             
             
             }//end of try block
