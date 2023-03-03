@@ -26,7 +26,6 @@
 package edu.wit.scds.ds.bag.adt ;
 
 import edu.wit.scds.ds.bag.BagInterface ;
-import edu.wit.scds.ds.bag.app.GroceryItem;
 
 import java.util.Arrays ;
 
