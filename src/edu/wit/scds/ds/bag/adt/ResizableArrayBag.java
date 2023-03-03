@@ -26,6 +26,7 @@
 package edu.wit.scds.ds.bag.adt ;
 
 import edu.wit.scds.ds.bag.BagInterface ;
+import edu.wit.scds.ds.bag.app.GroceryItem;
 
 import java.util.Arrays ;
 
@@ -272,9 +273,10 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
     @Override
     public T[] toArray()
         {
+
         checkIntegrity() ;
 
-        return Arrays.copyOf( this.bag, this.numberOfEntries ) ;
+        return Arrays.copyOf( this.bag, this.numberOfEntries) ;
 
         }   // end toArray()
 

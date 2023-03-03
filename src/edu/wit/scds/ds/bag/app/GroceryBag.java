@@ -1,5 +1,7 @@
 package edu.wit.scds.ds.bag.app ;
 
+import java.util.Arrays;
+
 import edu.wit.scds.ds.bag.BagInterface ;
 import edu.wit.scds.ds.bag.adt.ResizableArrayBag ;
 
@@ -13,7 +15,7 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	{
 	
     /** Underlying data structure used for storing GroceryItems */
-	private ResizableArrayBag<GroceryItem> b = new ResizableArrayBag<>() ;
+	private ResizableArrayBag<GroceryItem> b = new ResizableArrayBag<GroceryItem>() ;
 
     /** Maximum volume of the bag (unit is abstract) */
 	private final int maxVolume = 10 ;
@@ -159,6 +161,21 @@ public class GroceryBag implements BagInterface<GroceryItem>
 		
 		} // end of remove( GroceryItem )
 
+
+	/**
+	 * Copies an object array into a groceryItem array, assuming that the object array contains only instances of GroceryItem
+	 * Helper private method (used for to array)
+	 * @param source source array
+	 * @param dest destination array
+	 */
+	private static void copyArray(Object[] source, GroceryItem[] dest)
+        {
+            for (int i = 0; i < source.length; i++)
+				{
+                dest[i] = (GroceryItem) source[i] ;
+		        }
+        }
+
 	/**
 	 * Returns an array containing all items in the bag
 	 * @return an array containing all items in the bag
@@ -166,8 +183,11 @@ public class GroceryBag implements BagInterface<GroceryItem>
 	@Override
 	public GroceryItem[] toArray()
 		{
-		return b.toArray() ;
-		
+			Object[] objects = b.toArray(); // we know that this is full of items, so we're all good
+			GroceryItem[] items = new GroceryItem[objects.length];
+			copyArray(objects, items);
+			return items;
+			
 		} // end of toArray()
 	
 	/**

@@ -23,15 +23,13 @@ public class GroceryBagger
     public static void main(String[] args) 
         {
 
-
-
         try                             
             {
             Scanner shoppingCart = new Scanner(new FileInputStream("./data/shopping-cart.data")) ;
     
             String ignoreFirstLine = shoppingCart.nextLine() ;
             
-            ArrayList <GroceryBag>bags = new ArrayList<GroceryBag>();
+            ArrayList<GroceryBag> bags = new ArrayList<GroceryBag>();
             
             for(int i=0 ; i<20 ; i++) 
                 {
@@ -39,13 +37,13 @@ public class GroceryBagger
                 }
             
             
-            for(int i=0; i<20; i++) 
+            for(int i=0; i<20; i++)
                 {
             
                 while(shoppingCart.hasNextLine()) 
                     {
                     GroceryItem nextItem = new GroceryItem(shoppingCart.nextLine());
-                    if(isCompatible( bags.get( i ), nextItem ) ) 
+                    if(isCompatible( bags.get( i ), nextItem ) )  // error is occuring right here
                         {
                         bags.get(i).add( nextItem ) ;
                         continue ;
@@ -122,7 +120,7 @@ public class GroceryBagger
              */
              if(i.getFirmness() == 1) 
                  {
-                  if(bagContainsHeavy(b.toArray())) 
+                  if(bagContainsHeavy(b.toArray())) // class cast
                       {
                       return false ;
                       }
