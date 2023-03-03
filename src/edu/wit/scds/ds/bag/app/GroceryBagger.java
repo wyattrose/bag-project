@@ -1,12 +1,7 @@
 package edu.wit.scds.ds.bag.app ;
-
-import edu.wit.scds.ds.bag.BagInterface ;
-
-import java.io.File ;
 import java.io.FileInputStream ;
 import java.io.FileNotFoundException ;
 import java.util.ArrayList ;
-import java.util.Arrays;
 import java.util.Scanner ;
 
 /**
@@ -21,60 +16,58 @@ import java.util.Scanner ;
 public class GroceryBagger 
     {
 
+    /**
+     * Entry point for the bagger application
+     * @param args - unused
+     */
     public static void main(String[] args) 
         {
 
-        try                             
+        try                   
             {
             Scanner shoppingCart = new Scanner(new FileInputStream("./data/shopping-cart.data")) ;
     
-            String ignoreFirstLine = shoppingCart.nextLine() ;
+            shoppingCart.nextLine() ;
             
-            ArrayList<GroceryBag> bags = new ArrayList<GroceryBag>();
-            
-            for(int i=0 ; i<20 ; i++) 
+            ArrayList<GroceryBag> bags = new ArrayList<GroceryBag>() ;
+            bags.add(new GroceryBag()) ;
+
+            for(int i=0; i<=bags.size(); i++) 
                 {
-                bags.add( i, new GroceryBag() ) ;
-                }
-            
-            
-            for(int i=0; i<20; i++)
-                {
-            
+
                 while(shoppingCart.hasNextLine()) 
                     {
-                    GroceryItem nextItem = new GroceryItem(shoppingCart.nextLine());
-                    if(isCompatible( bags.get( i ), nextItem ) )
+                    GroceryItem nextItem = new GroceryItem(shoppingCart.nextLine()) ;
+                    if(isCompatible( bags.get( i ), nextItem ) ) 
                         {
                         bags.get(i).add( nextItem ) ;
                         continue ;
                         }
                     else 
                         {
-                        bags.get( i+1 ).add( nextItem );
-                        break;
+                        bags.add( new GroceryBag() ) ;
+                        bags.get( i+1 ).add( nextItem ) ;
+                        break ;
                         }
                     }
                 }
-            
 
-                for(int j = 0; j < bags.size(); j++) {
-                    GroceryItem[] itemArray = bags.get(j).toArray();
-                    System.out.printf("Bag #%d%n",j);
-                    for(int i = 0; i < itemArray.length; i++) {
-                        System.out.println("\t"+itemArray[i].toString());
+            for(int j = 0; j < bags.size(); j++)
+                {
+                GroceryItem[] itemArray = bags.get(j).toArray() ;
+                System.out.printf("Bag #%d%n",j) ;
+
+                for(int i = 0; i < itemArray.length; i++)
+                    {
+                    System.out.println("\t"+itemArray[i].toString()) ;
                     }
-
                 }
-            
-            
-            }//end of try block
-            
         
-    
+            }//end of try block
+
         catch ( final FileNotFoundException e )
             {
-         // can't open the file
+            // can't open the file
             System.out.printf( "Unable to open the shopping cart:%n%s%n", e ) ;
 
             // get out
@@ -411,9 +404,4 @@ public class GroceryBagger
             return b.getCurrentVolume() + i.getSize() > b.getMaxVolume() ;
             }
         
-
-
-
-
-
     } //end of class
